@@ -1,0 +1,73 @@
+{
+  "info": {
+    "name": "Guía 8 - Biblioteca Spring Data JPA (Actividades)",
+    "description": "Colección para probar la API de la biblioteca y las 4 actividades evaluadas de la Guía 8 (UNSAAC - Desarrollo de Software I). Arranque la aplicación y la base de datos antes de ejecutar.",
+    "_postman_id": "9f1c2a34-guia8-biblioteca-actividades",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" }
+  ],
+  "item": [
+    {
+      "name": "Guía 8 (base)",
+      "item": [
+        { "name": "GET listar libros", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/libros", "host": ["{{baseUrl}}"], "path": ["api", "libros"] } } },
+        { "name": "GET libro por id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/libros/3", "host": ["{{baseUrl}}"], "path": ["api", "libros", "3"] } } },
+        { "name": "GET buscar libros ?q=", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/libros?q=java", "host": ["{{baseUrl}}"], "path": ["api", "libros"], "query": [ { "key": "q", "value": "java" } ] } } },
+        { "name": "GET libros por categoría", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/libros?categoria=Redes", "host": ["{{baseUrl}}"], "path": ["api", "libros"], "query": [ { "key": "categoria", "value": "Redes" } ] } } },
+        { "name": "GET resumen por categoría (JPQL)", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/libros/resumen", "host": ["{{baseUrl}}"], "path": ["api", "libros", "resumen"] } } },
+        { "name": "GET más caros (consulta nativa)", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/libros/mas-caros?cantidad=3", "host": ["{{baseUrl}}"], "path": ["api", "libros", "mas-caros"], "query": [ { "key": "cantidad", "value": "3" } ] } } },
+        { "name": "GET historial de un libro", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/libros/7/prestamos", "host": ["{{baseUrl}}"], "path": ["api", "libros", "7", "prestamos"] } } },
+        { "name": "GET autores", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/autores", "host": ["{{baseUrl}}"], "path": ["api", "autores"] } } },
+        { "name": "GET libros de un autor", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/autores/4/libros", "host": ["{{baseUrl}}"], "path": ["api", "autores", "4", "libros"] } } },
+        { "name": "GET categorías", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/categorias", "host": ["{{baseUrl}}"], "path": ["api", "categorias"] } } },
+        { "name": "GET préstamos activos", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/prestamos?activos=true", "host": ["{{baseUrl}}"], "path": ["api", "prestamos"], "query": [ { "key": "activos", "value": "true" } ] } } },
+        { "name": "POST registrar libro", "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"titulo\": \"Spring Data JPA\", \"anio\": 2026, \"precio\": 59.9, \"autorId\": 1, \"categoriaId\": 5 }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/libros", "host": ["{{baseUrl}}"], "path": ["api", "libros"] } } },
+        { "name": "PUT actualizar libro", "request": { "method": "PUT", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"titulo\": \"Spring Data JPA 2a edición\", \"anio\": 2026, \"precio\": 65.0, \"autorId\": 1, \"categoriaId\": 5 }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/libros/21", "host": ["{{baseUrl}}"], "path": ["api", "libros", "21"] } } },
+        { "name": "DELETE libro", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/libros/21", "host": ["{{baseUrl}}"], "path": ["api", "libros", "21"] } } },
+        { "name": "POST préstamo", "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"libroId\": 2, \"lectorId\": 4 }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/prestamos", "host": ["{{baseUrl}}"], "path": ["api", "prestamos"] } } },
+        { "name": "PUT devolución", "request": { "method": "PUT", "url": { "raw": "{{baseUrl}}/api/prestamos/11/devolucion", "host": ["{{baseUrl}}"], "path": ["api", "prestamos", "11", "devolucion"] } } }
+      ]
+    },
+    {
+      "name": "Actividad 1 - CRUD autores",
+      "item": [
+        { "name": "POST crear autor (201)", "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"nombres\": \"Gabriel García Márquez\", \"nacionalidad\": \"Peruano\" }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/autores", "host": ["{{baseUrl}}"], "path": ["api", "autores"] } } },
+        { "name": "POST autor con nombre corto (400)", "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"nombres\": \"Bo\" }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/autores", "host": ["{{baseUrl}}"], "path": ["api", "autores"] } } },
+        { "name": "PUT actualizar autor (200)", "request": { "method": "PUT", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"nombres\": \"Federico García Lorca\", \"nacionalidad\": \"Español\" }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/autores/9", "host": ["{{baseUrl}}"], "path": ["api", "autores", "9"] } } },
+        { "name": "PUT autor inexistente (404)", "request": { "method": "PUT", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"nombres\": \"Nombre Inexistente\" }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/autores/999", "host": ["{{baseUrl}}"], "path": ["api", "autores", "999"] } } },
+        { "name": "DELETE autor con libros (409)", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/autores/1", "host": ["{{baseUrl}}"], "path": ["api", "autores", "1"] } } },
+        { "name": "DELETE autor sin libros (204)", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/autores/10", "host": ["{{baseUrl}}"], "path": ["api", "autores", "10"] } } }
+      ]
+    },
+    {
+      "name": "Actividad 2 - CRUD categorías",
+      "item": [
+        { "name": "POST crear categoría (201)", "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"nombre\": \"Poemas y Novelas\" }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/categorias", "host": ["{{baseUrl}}"], "path": ["api", "categorias"] } } },
+        { "name": "POST categoría duplicada (409)", "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"nombre\": \"bases de datos\" }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/categorias", "host": ["{{baseUrl}}"], "path": ["api", "categorias"] } } },
+        { "name": "PUT actualizar categoría (200)", "request": { "method": "PUT", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"nombre\": \"Literatura\" }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/categorias/8", "host": ["{{baseUrl}}"], "path": ["api", "categorias", "8"] } } },
+        { "name": "DELETE categoría sin libros (204)", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/categorias/8", "host": ["{{baseUrl}}"], "path": ["api", "categorias", "8"] } } },
+        { "name": "DELETE categoría con libros (409)", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/categorias/2", "host": ["{{baseUrl}}"], "path": ["api", "categorias", "2"] } } }
+      ]
+    },
+    {
+      "name": "Actividad 3 - Rango y más prestados",
+      "item": [
+        { "name": "GET libros por rango de años", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/libros/rango?desde=2010&hasta=2020", "host": ["{{baseUrl}}"], "path": ["api", "libros", "rango"], "query": [ { "key": "desde", "value": "2010" }, { "key": "hasta", "value": "2020" } ] } } },
+        { "name": "GET libros más prestados (JPQL GROUP BY)", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/libros/mas-prestados", "host": ["{{baseUrl}}"], "path": ["api", "libros", "mas-prestados"] } } }
+      ]
+    },
+    {
+      "name": "Actividad 4 - Lectores normalizados",
+      "item": [
+        { "name": "POST préstamo con lectorId (201)", "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"libroId\": 2, \"lectorId\": 6 }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/prestamos", "host": ["{{baseUrl}}"], "path": ["api", "prestamos"] } } },
+        { "name": "POST lector inexistente (404)", "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"libroId\": 4, \"lectorId\": 999 }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/prestamos", "host": ["{{baseUrl}}"], "path": ["api", "prestamos"] } } },
+        { "name": "POST sin lectorId (400)", "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"libroId\": 2 }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/prestamos", "host": ["{{baseUrl}}"], "path": ["api", "prestamos"] } } },
+        { "name": "POST libro ya prestado (409)", "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{ \"libroId\": 2, \"lectorId\": 6 }", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/api/prestamos", "host": ["{{baseUrl}}"], "path": ["api", "prestamos"] } } },
+        { "name": "GET historial de un lector (200)", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/lectores/6/prestamos", "host": ["{{baseUrl}}"], "path": ["api", "lectores", "6", "prestamos"] } } },
+        { "name": "GET lector inexistente (404)", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/lectores/999/prestamos", "host": ["{{baseUrl}}"], "path": ["api", "lectores", "999", "prestamos"] } } }
+      ]
+    }
+  ]
+}
